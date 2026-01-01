@@ -1,14 +1,11 @@
 # Human Microbiome Phyloseq Project
 
-## Quick project summary
+## Introduction/Project Summary
 This project analyzes salivary microbiome data from the Human Microbiome Project (HMP V1–V3) using R and Bioconductor.
 I processed 162 saliva samples (14,428 taxa), performed ecological diversity analysis (alpha, beta, PCoA), and tested for group-level significance using PERMANOVA.
 Differential abundance testing with ANCOM-BC2 identified 1,011 significantly different taxa out of 2,524 abundant microbes.
 Despite these individual differences, sex explained only 0.76% of total variance, showing minimal biological impact on overall community structure.
 This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, ANCOM-BC2 modeling, heatmaps, and biological interpretation.
-
-## Introduction
-In this project, we will analyze oral microbiome data of variants 1 through 3 of the Human Microbiome Project (HMP) database using R. We will perform a phyloseq ecological statistical analysis by measuring alpha and beta diversity, observing differences in group composition (ex: abundance vs richness vs evenness), calculating PERMANOVA/permutations, performing differential abundance analysis of salivary microbes amongst male and female samples via ANCOM-BC2 to test for statistical significance, and plot graphs for visualization of our interpreted results.
 
 ## Load the HMP and phyloseq Packages and Convert Microbiome Data into phyloseq
 
@@ -71,7 +68,7 @@ taxonomy_table <- tax_table(ps_hmp_saliva)
 phylogeny_tree <- phy_tree(ps_hmp_saliva)
 ```
 
-## Determining the alpha and beta diversity of tbe sample population
+## Determining the alpha and beta diversity of the sample population
 
 The purpose of determining the alpha and beta parameters is to analyze the microbial diversity within tbe subsetted sample (salivary). Alpha diversity measures the diversity of different microbes within a single sample, where a high alpha diversity indicates high abundance of a certain microbe in a sample (example: saliva), whereas a low diversity a lower abundance. On the other hand, beta diversity measures the similarity of microbial species between different samples (example: multiple saliva sample). A high beta diversity indicates that there is a difference in composition between samples (example: sample 1 may have more Campylobacter in their saliva while another may have more Neisseria), whereas a low diversity indicates they are similar (both samples have a similar abundance of Prevotella).
 To make this easier to understand, alpha diversity is like to counting the different colors of jelly beans in one jar, while beta diversity is similar to comparing two jars and determining if they have the same jelly bean colors.
