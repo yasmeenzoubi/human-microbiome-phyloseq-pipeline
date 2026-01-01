@@ -22,7 +22,7 @@ library(pheatmap)
 #Load sequencing data for variable regions 1–3 (V1-V3) from the HMP (the database is very large, selecting a subset of variable regions makes the analysis easier and less time consuming
 hmp_se_data <- V13()
 
-#Convert microbiome data into phyloseq (phyloseq is a useful R package that helps us analyze, interpret, and visualize microbiome statistical data)
+#Convert microbiome data into phyloseq (phyloseq is a useful R package that helps with analyzing, interpreting, and visualizing microbiome statistical data)
 ps_hmp <- as_phyloseq(hmp_se_data)
 ```
 
@@ -48,35 +48,35 @@ sample_data() Sample Data:       [ 162 samples by 7 sample variables ]
 tax_table()   Taxonomy Table:    [ 14428 taxa by 6 taxonomic ranks ]
 phy_tree()    Phylogenetic Tree: [ 14428 tips and 12701 internal nodes ]
 ```
-14428 taxa and 162 samples (male and female) are present in our filtered subset.
+14428 taxa and 162 samples (male and female) are present in the filtered subset.
 
 ## Extract tables for the saliva subset
 Take data from the HMP phyloseq and turn them into tables that are easy to visualize and interpret.
 
 ```r
-#this will make a table consisting of the operational taxonomic units (OTU) abundance which tells us the raw counts of how many microbes appear in a certain sample
+#this will make a table consisting of the operational taxonomic units (OTU) abundance which illustrates the raw counts of how many microbes appear in a certain sample
 counts_table <- otu_table(ps_hmp_saliva)
 #metadata table consists of each sample and the sex and body site/subsite it was taken from (for example: male and oral/saliva) as well as the sequencing center (a potential batch effect).  Include the data.frame code to convert vectors into tables
 metadata_table <- as(sample_data(ps_hmp_saliva), "data.frame")
 #the taxonomy table consists of a long list of each microbe found in the human saliva sample organized into taxonomic levels from superkingdom to species.
 taxonomy_table <- tax_table(ps_hmp_saliva)
-#a phylogeny tree helps us see what organisms are related and fall under the same evolutionary group (example: same genus or order).
+#a phylogeny tree illustrates which organisms are related and fall under the same evolutionary group (example: same genus or order).
 phylogeny_tree <- phy_tree(ps_hmp_saliva)
 ```
 
-## Determining the alpha and beta diversity of our sample population
+## Determining the alpha and beta diversity of tbe sample population
 
-The purpose of determining the alpha and beta parameters is to analyze the microbial diversity within our sample (salivary). Alpha diversity measures the diversity of different microbes within a single sample, where a high alpha diversity indicates high abundance of a certain microbe in a sample (example: saliva), whereas a low diversity a lower abundance. On the other hand, beta diversity measures the similarity of microbial species between different samples (example: multiple saliva sample). A high beta diversity indicates that there is a difference in composition between samples (example: sample 1 may have more Campylobacter in their saliva while another may have more Neisseria), whereas a low diversity indicates they are similar (both samples have a similar abundance of Prevotella).
+The purpose of determining the alpha and beta parameters is to analyze the microbial diversity within tbe subsetted sample (salivary). Alpha diversity measures the diversity of different microbes within a single sample, where a high alpha diversity indicates high abundance of a certain microbe in a sample (example: saliva), whereas a low diversity a lower abundance. On the other hand, beta diversity measures the similarity of microbial species between different samples (example: multiple saliva sample). A high beta diversity indicates that there is a difference in composition between samples (example: sample 1 may have more Campylobacter in their saliva while another may have more Neisseria), whereas a low diversity indicates they are similar (both samples have a similar abundance of Prevotella).
 To make this easier to understand, alpha diversity is like to counting the different colors of jelly beans in one jar, while beta diversity is similar to comparing two jars and determining if they have the same jelly bean colors.
 
 ### Alpha Diversity
-Here I will use Shannon the index to calculate our alpha diversity. The Shannon index is a useful here since it helps us estimate species richness (number of different species are present in the saliva sample) and evenness (how evenly distributed microbes are).
+Here I will use Shannon the index to calculate the alpha diversity. The Shannon index is a useful here since it helps with estimating species richness (number of different species are present in the saliva sample) and evenness (how evenly distributed microbes are).
 
 ```r
 #Calculate alpha diversity
-#In this context, richness means how many different species exist in our sample, which helps with determining if there is high or low alpha diversity.
+#In this context, richness means how many different species exist in the saliva samples, which helps with determining if there is high or low alpha diversity.
 alpha <- estimate_richness(ps_hmp_saliva, measures = c("Shannon", "Observed"))
-#The head function will show us the top 6 results
+#The head function will print the top 6 results
 head(alpha)
 ```
 Output
@@ -92,16 +92,16 @@ X700014909      610 5.711375
 ```
 
 ```r
-#Plot results (this will show us a vertical plot of multiple scatter points showing species abundance and diversity)
+#Plot results (this will illustrate a vertical plot of multiple scatter points showing species abundance and diversity)
 plot_richness(ps_hmp_saliva, x="HMP_BODY_SUBSITE", measures=c("Shannon","Observed"))
 ```
 
 ![Alpha Diversity Plot](alpha_diversity.png)
 
-Interpretation: This plot represents the “Observed”, which measures species abundance, and “Shannon”, which measures species abundance and evenness (how evenly abundant the species are). The “Observed” plot has a wide distribution, indicating that there is wide range of species in the sample (high richness). The “Shannon” plot has concentrated measure between 5-6.5, which indicates higher species richness and evenness. Both plots indicate that our saliva sample has high richness and evenness.
+Interpretation: This plot represents the “Observed”, which measures species abundance, and “Shannon”, which measures species abundance and evenness (how evenly abundant the species are). The “Observed” plot has a wide distribution, indicating that there is wide range of species in the sample (high richness). The “Shannon” plot has concentrated measure between 5-6.5, which indicates higher species richness and evenness. Both plots indicate that the saliva samples has high richness and evenness.
 
 ### Beta Diversity and PERMANOVA
-To calculate the beta diversity of our saliva microbiome data, I used Bray-Curtis and Permutational Multivariate Analysis of Variance (PERMANOVA). Bray-Curtis is a standard tool used to measure species composition between two sites and is sensitive to differences between groups. PERMANOVA helps us compare community composition between groups by using permutations (different ways to organize and rearrange a group of items) a to get p-values.
+To calculate the beta diversity of the saliva microbiome data, I used Bray-Curtis and Permutational Multivariate Analysis of Variance (PERMANOVA). Bray-Curtis is a standard tool used to measure species composition between two sites and is sensitive to differences between groups. PERMANOVA helps with comparing community composition between groups by using permutations (different ways to organize and rearrange a group of items) a to get p-values.
 
 ```r
 #Calculate beta diversity
@@ -151,17 +151,17 @@ PERMANOVA measured statistical significance between overall species diversity an
 ```r
 #ANCOM-BC2 calculation (this step can take some time)
 ancom_res <- ancombc2(
-    data = ps_hmp_saliva,       #Inputs our phyloseq data here
-    assay_name = "counts",     #This tells the code to look for the number of times each microbe was found in our data object
+    data = ps_hmp_saliva,       #Inputs phyloseq data here
+    assay_name = "counts",     #This tells the code to look for the number of times each microbe was found in the data object
     tax_level = NULL,          #This tells the code to look at microbes individually rather than group based on family/order/genus.
     fix_formula = "SEX",       #The variable tested is "SEX" (males vs females)
     rand_formula = NULL,  #Set this as “NULL” because I want to obtain individual saliva samples from different people instead of obtaining samples from the same person multiple times
-    p_adj_method = "fdr",      #False discovery rate (FDR) helps us get rid of random, significant results in our data that appear by pure luck
-    group = "SEX"              #This is our grouping variable
+    p_adj_method = "fdr",      #False discovery rate (FDR) helps get rid of random, significant results in the data that appear by pure luck
+    group = "SEX"              #This is the grouping variable
 )	
 #res_df will compile everything
 results_df <- ancom_res$res
-#results_df is a very extensive dataset, the head function reduces this burden and gives us the top 6 lines.
+#results_df is a very extensive dataset, the head function reduces this burden and prints the top 6 lines.
 head(results_df)
 ```
 Output
@@ -217,7 +217,7 @@ Output
 Interpretation: Out of 2524 abundant microbes tested, 1011 showed significant differences in abundance between sexes
 
 ## Creating a heat map/dendogram to illustrate if there is a difference in abundance in the top 20 microbes between male and female saliva samples
-I want to see the top 20 most abundant microbes in our various male and female saliva samples and assess the diversity in overall diversity profile. This can be visualized via a heatmap
+I want to see the top 20 most abundant microbes in the various male and female saliva samples and assess the diversity in overall diversity profile. This can be visualized via a heatmap
 
 ```r
 # Convert OTU table to matrix
@@ -253,7 +253,7 @@ pheatmap(mat, cluster_rows = TRUE, cluster_cols = FALSE, show_rownames = TRUE, s
 
 ![Microbe Heatmap](microbe_heatmap.png)
 
-Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms our PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendogram branching.
+Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms the PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendogram branching.
 
 ## Creating an Alpha Diversity Box Plot to compare Diversity of Microbes between Male and Female Saliva Samples (Shannon method)
 Generate a Shannon index alpha diversity plot to compare microbe diversity between male and female samples.
@@ -279,18 +279,18 @@ Here I want to compare the beta diversity of microbes between male and female sa
 #ordinate via Bray-Curtis then plot
 ord <- ordinate(ps_hmp_saliva, method = "PCoA", distance = "bray")
 plot_ordination(ps_hmp_saliva, ord, color="SEX") + #same plot as above but add SEX as a variable for analyzing diversity differences
-     geom_point(size=3, alpha=0.7) + #this step adds our points
+     geom_point(size=3, alpha=0.7) + #this step adds the points
      labs(title="PCoA of Bray-Curtis Distances", color="Gender") + #color points by gender
-     stat_ellipse(aes(color = SEX)) + # Nice to have, adds confidence ellipses to make sure our points are within it
+     stat_ellipse(aes(color = SEX)) + # Nice to have, adds confidence ellipses to make sure the points are within it
      theme_classic()
 ```
 
 ![Beta Diversity Scatter Plot](beta_diversity_scatter.png)
 
-Interpretation: The scatter plots of each male and female saliva sample are moderately spread, indicating variation in microbial community composition between individual samples. However a lot of the male and female saliva sample points overlap, therefore proving there is a similar diversity and abundance pattern amongst both groups. This confirms our earlier findings in our PERMANOVA, ANCOM-BC2, and bar graph.
+Interpretation: The scatter plots of each male and female saliva sample are moderately spread, indicating variation in microbial community composition between individual samples. However a lot of the male and female saliva sample points overlap, therefore proving there is a similar diversity and abundance pattern amongst both groups. This confirms the earlier findings in the PERMANOVA and ANCOM-BC2 analysis.
 
 ## Conclusion
-I utilized different methods to analyze the microbiome profile of male and female saliva samples, including alpha and beta diversity/PERMANOVA, ANCOM-BC2 differential abundance analysis, and visualization. Out of 2524 abundant microbes tested, 1011 showed significant differences in abundance between sexes. However, because our PERMANOVA showed that sex influences a very little percentage (0.764%) of the overall microbial variance, these individual differences are likely minor and do not change the overall pattern of the salivary microbiome between men and women.
+I utilized different methods to analyze the microbiome profile of male and female saliva samples, including alpha and beta diversity/PERMANOVA, ANCOM-BC2 differential abundance analysis, and visualization. Out of 2524 abundant microbes tested, 1011 showed significant differences in abundance between sexes. However, because PERMANOVA showed that sex influences a very little percentage (0.764%) of the overall microbial variance, these individual differences are likely minor and do not change the overall pattern of the salivary microbiome between men and women.
 To consider other sources of variation (batch effects), the following code sequence can be performed:
 
 ```r
