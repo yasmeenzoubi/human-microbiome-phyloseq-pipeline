@@ -36,7 +36,7 @@ ps_hmp_saliva <- subset_samples(ps_hmp, HMP_BODY_SUBSITE == "Saliva")
 #Filter non-zero data
 ps_hmp_saliva <- prune_taxa(taxa_sums(ps_hmp_saliva) > 0, ps_hmp_saliva)
 
-#Idenify how many samples and taxa we have in the saliva dataet
+#Idenify how many samples and taxa present in the saliva dataet
 ps_hmp_saliva
 ```
 Output
@@ -117,7 +117,7 @@ plot_ordination(ps_hmp_saliva, ord, color = "HMP_BODY_SUBSITE") +
 
 Interpretation: The PCoA plot illustrates that the points are spread out, indicating high species diversity amongst various salivary samples, and therefore, a high beta diversity.
 
-Next we perform PERMANOVA to test for statistical significance between microbe diversity and sex
+Next, perform PERMANOVA to test for statistical significance between microbe diversity and sex
 
 ```r
 #Here a seed is set to ensure reproducibility. Think of PERMANOVA as shuffling cards. Each seed value will determine a different shuffling sequence. A seed of 123 is very commonly used in statistical analysis.
@@ -265,7 +265,7 @@ plot_richness(ps_hmp_saliva,
   geom_boxplot(alpha = 0.6) + #adds the boxplot
   geom_point(size = 2, aes(color = SEX)) + #adds the plots and gives male and female group a different color.
   labs(title = "Shannon Diversity by Gender in Saliva", x = "Gender") +
-  theme_bw() #gives us a professional and easy-to-read graph
+  theme_bw() #generates a professional and easy-to-read graph
 ```
 
 ![Alpha Diversity Box Plot](alpha_diversity_box.png)
