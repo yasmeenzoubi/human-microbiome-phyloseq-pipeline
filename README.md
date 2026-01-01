@@ -1,5 +1,12 @@
 # Human Microbiome Phyloseq Project
 
+## Quick project summary
+This project analyzes salivary microbiome data from the Human Microbiome Project (HMP V1–V3) using R and Bioconductor.
+I processed 162 saliva samples (14,428 taxa), performed ecological diversity analysis (alpha, beta, PCoA), and tested for group-level significance using PERMANOVA.
+Differential abundance testing with ANCOM-BC2 identified 1,011 significantly different taxa out of 2,524 abundant microbes.
+Despite these individual differences, sex explained only 0.76% of total variance, showing minimal biological impact on overall community structure.
+This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, ANCOM-BC2 modeling, heatmaps, and biological interpretation.
+
 ## Introduction
 In this project, we will analyze oral microbiome data of variants 1 through 3 of the Human Microbiome Project (HMP) database using R. We will perform a phyloseq ecological statistical analysis by measuring alpha and beta diversity, observing differences in group composition (ex: abundance vs richness vs evenness), calculating PERMANOVA/permutations, performing differential abundance analysis of salivary microbes amongst male and female samples via ANCOM-BC2 to test for statistical significance, and plot graphs for visualization of our interpreted results.
 
