@@ -5,7 +5,7 @@ This project analyzes salivary microbiome data from the Human Microbiome Project
 I processed 162 saliva samples (14,428 taxa), performed ecological diversity analysis (alpha, beta, PCoA), and tested for group-level significance using PERMANOVA.
 Differential abundance testing with ANCOM-BC2 identified 1,011 significantly different taxa out of 2,524 abundant microbes.
 Despite these individual differences, sex explained only 0.76% of total variance, showing minimal biological impact on overall community structure.
-This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, ANCOM-BC2 modeling, heatmaps, and biological interpretation.
+This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, ANCOM-BC2 modeling, volcano plots, heatmaps, and biological interpretation.
 
 ## Load the HMP and phyloseq Packages and Convert Microbiome Data into phyloseq
 
@@ -262,10 +262,6 @@ EnhancedVolcano(results_df,
     title = "Microbiome: Male vs Female",
     pCutoff = 0.05,
     FCcutoff = 1.0,
-    pointSize = 2.0,
-    labSize = 3.0,
-    legendLabels = c('NS', 'LFC', 'q-value', 'q-value & LFC'),
-    legendPosition = 'right'
 )
 ```
 
