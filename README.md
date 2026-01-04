@@ -227,7 +227,7 @@ Output
 
 Interpretation: Out of 2524 abundant microbes tested, 1011 showed significant differences in abundance between sexes
 
-## Creating a heat map/dendogram to illustrate if there is a difference in abundance in the top 20 microbes between male and female saliva samples
+## Creating a heat map/dendrogram to illustrate if there is a difference in abundance in the top 20 microbes between male and female saliva samples
 I want to see the top 20 most abundant microbes in the various male and female saliva samples and assess the diversity in overall diversity profile. This can be visualized via a heatmap
 
 ```r
@@ -255,7 +255,7 @@ pheatmap(mat_scaled, main = "Top 20 Salivary Microbes: Male vs Female", cluster_
 
 ![Microbe Heatmap](microbe_heatmap.png)
 
-Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms the PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendogram branching.
+Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms the PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendrograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendrogram branching.
 
 ## Creating a Volcano Plot
 A volcano plot can be used to visually the ANCOMBC differential abundance analysis results. As previously seen, 1011 out of a total of 2524 microbes were measured to be significant. This plot will represent the log fold change on the x axis and p value on the y axis. The x axis will represent microbes statistically significant in male vs female samples while the y axis  will measure how statistically significant each microbe is.
