@@ -252,7 +252,8 @@ pheatmap(mat_scaled, main = "Top 20 Salivary Microbes: Male vs Female", cluster_
 Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms the PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendogram branching.
 
 ## Creating a Volcano Plot
-A volcano plot can also be utilized to compare the statistical significance between male and female saliva microbes.
+A volcano plot can be used to visually the ANCOMBC differential abundance analysis results. As previously seen, 1011 out of a total of 2524 microbes were measured to be significant. This plot will represent the log fold change on the x axis and p value on the y axis. The x axis will represent microbes statistically significant in male vs female samples while the y axis  will measure how statistically significant each microbe is.
+
 ```r
 EnhancedVolcano(results_df,
     lab = results_df$taxon,        # Column with OTU or Taxon names
@@ -269,7 +270,7 @@ EnhancedVolcano(results_df,
 ```
 
 ![Microbe Volcano](volcano_hmp.png)
-Interpretation: 
+Interpretation: Here, female sample microbes are represented with a negative log fold change, while male sample microbes are represented with a positive log fold change. The volcano plot does confirm the ANCOMBC outputs and illustrates significant microbes that are unique to either male and female samples. However, the maximum statistical significance observed in the plot is around ~10^8, and there only a handful of microbes that are highly significant - OTU_97.38689 and OTU_97.31471 in women and OTU_97.431, OTU_97.13449, OTU_97.22352, and OTU_97.2979 in men. Overall this plot confirms the findings of the differential abundance performed above which measured significant microbes across male and female samples.
 
 ## Creating an Alpha Diversity Box Plot to compare Diversity of Microbes between Male and Female Saliva Samples (Shannon method)
 Generate a Shannon index alpha diversity plot to compare microbe diversity between male and female samples.
