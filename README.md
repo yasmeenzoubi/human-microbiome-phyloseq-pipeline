@@ -3,18 +3,20 @@
 ## Introduction/Project Summary
 This project analyzes salivary microbiome data from the Human Microbiome Project (HMP V1–V3) using R and Bioconductor.
 I processed 162 saliva samples (14428 taxa), performed ecological diversity analysis (alpha, beta, and PCoA), and tested for significance between male and female saliva microbes using PERMANOVA.
-I then performed differential abundance testing via ANCOM-BC2 and identified 1011 significantly different microrbes out of a total of 2524.
+I then performed differential abundance testing via ANCOM-BC2 and identified 1011 significantly different microbes out of a total of 2524.
 Despite these individual differences, sex explained only 0.764% of total variance, therefore possessing minimal biological impact on overall community composition.
-This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, differntial abundance analysis (ANCOM-BC2), volcano plots, heatmaps, and biological interpretation.
+This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, differential abundance analysis (ANCOM-BC2), volcano plots, heatmaps, and biological interpretation.
 
-## Load the HMP and phyloseq Packages and Convert Microbiome Data into phyloseq
+## Install necessary packages
 
 ```r
-#Install necessary packages
 BiocManager::install(c("HMP16SData", "phyloseq", "ANCOMBC", "EnhancedVolcano"))
 install.packages(c("ggplot2", "dplyr", "vegan", "pheatmap"))
+```
 
-#Load necessary packages
+## Load necessary packages
+
+```r
 library(HMP16SData)
 library(phyloseq)
 library(ggplot2)
@@ -23,7 +25,11 @@ library(ANCOMBC)
 library(dplyr)
 library(pheatmap)
 library(EnhancedVolcano)
+```
 
+## Convert Microbiome Data into phyloseq
+
+```r
 #Load sequencing data for variable regions 1–3 (V1-V3) from the HMP (the database is very large, selecting a subset of variable regions makes the analysis easier and less time consuming
 hmp_se_data <- V13()
 
@@ -240,7 +246,7 @@ col_sums <- colSums(mat)
 col_sums[col_sums == 0] <- 1
 mat <- t(t(mat) / col_sums * 100)
 #Perform Z-score
-mat <- t(scale(t(mat))) 
+mat_scaled <- t(scale(t(mat))) 
 # Remove rows with zero variance (required by pheatmap)
 mat_scaled[is.na(mat_scaled)] <- 0
 #Plot heatmap
@@ -277,7 +283,7 @@ plot_richness(ps_hmp_saliva,
               measures = c("Shannon")) +
   geom_boxplot(alpha = 0.6) + #adds the boxplot
   geom_point(size = 2, aes(color = SEX)) + #adds the plots and gives male and female group a different color.
-  labs(title = "Shannon Diversity by Gender in Saliva", x = "Gender") +
+  labs(title = "Shannon Diversity by Sex in Saliva", x = "Sex") +
   theme_bw() #generates a professional and easy-to-read graph
 ```
 
@@ -293,7 +299,7 @@ Here I want to compare the beta diversity of microbes between male and female sa
 ord <- ordinate(ps_hmp_saliva, method = "PCoA", distance = "bray")
 plot_ordination(ps_hmp_saliva, ord, color="SEX") + #same plot as above but add SEX as a variable for analyzing diversity differences
      geom_point(size=3, alpha=0.7) + #this step adds the points
-     labs(title="PCoA of Bray-Curtis Distances", color="Gender") + #color points by gender
+     labs(title="PCoA of Bray-Curtis Distances", color="Sex") + #color points by sex
      stat_ellipse(aes(color = SEX)) + # Nice to have, adds confidence ellipses to make sure the points are within it
      theme_classic()
 ```
