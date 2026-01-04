@@ -11,7 +11,7 @@ This project demonstrates real-world microbiome workflows: phyloseq analysis, di
 
 ```r
 #Install necessary packages
-BiocManager::install(c("HMP16SData", "phyloseq", "ANCOMBC"))
+BiocManager::install(c("HMP16SData", "phyloseq", "ANCOMBC", "EnhancedVolcano"))
 install.packages(c("ggplot2", "dplyr", "vegan", "pheatmap"))
 
 #Load necessary packages
@@ -22,6 +22,7 @@ library(vegan)
 library(ANCOMBC)
 library(dplyr)
 library(pheatmap)
+library(EnhancedVolcano)
 
 #Load sequencing data for variable regions 1–3 (V1-V3) from the HMP (the database is very large, selecting a subset of variable regions makes the analysis easier and less time consuming
 hmp_se_data <- V13()
