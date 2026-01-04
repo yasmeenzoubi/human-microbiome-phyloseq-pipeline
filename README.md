@@ -2,10 +2,10 @@
 
 ## Introduction/Project Summary
 This project analyzes salivary microbiome data from the Human Microbiome Project (HMP V1–V3) using R and Bioconductor.
-I processed 162 saliva samples (14,428 taxa), performed ecological diversity analysis (alpha, beta, PCoA), and tested for group-level significance using PERMANOVA.
-Differential abundance testing with ANCOM-BC2 identified 1,011 significantly different taxa out of 2,524 abundant microbes.
-Despite these individual differences, sex explained only 0.76% of total variance, showing minimal biological impact on overall community structure.
-This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, ANCOM-BC2 modeling, volcano plots, heatmaps, and biological interpretation.
+I processed 162 saliva samples (14428 taxa), performed ecological diversity analysis (alpha, beta, and PCoA), and tested for significance between male and female saliva microbes using PERMANOVA.
+I then performed differential abundance testing via ANCOM-BC2 and identified 1011 significantly different microrbes out of a total of 2524.
+Despite these individual differences, sex explained only 0.764% of total variance, therefore possessing minimal biological impact on overall community composition.
+This project demonstrates real-world microbiome workflows: phyloseq analysis, diversity metrics, PCoA, PERMANOVA, differntial abundance analysis (ANCOM-BC2), volcano plots, heatmaps, and biological interpretation.
 
 ## Load the HMP and phyloseq Packages and Convert Microbiome Data into phyloseq
 
@@ -195,7 +195,7 @@ Output
 6        FALSE                  TRUE              TRUE
 ```
 
-Interpretation: The q_SEXMale column represents the FDR-adjusted p-values and diff_SEXMale column represents whether to there is statistical significance between saliva microbe abundance and sex. For species 1,3, and 4, p < 0.05 and diff_SEXMale is “TRUE”, therefore I reject the null hypothesis which states there is no statistical significance between species abundance and sex. Since the lfc_SEXMale values are negative for species 1,3, and 4, I conclude they are more abundant in females. Conversely, in species 2, 5, 6, p > 0.05 and diff_SEXMale is “FALSE”,  and I fail to reject the null hypothesis.
+Interpretation: The q_SEXMale column represents the FDR-adjusted p-values and diff_SEXMale column represents whether to there is statistical significance between saliva microbe abundance and sex. For species 1, 3, and 4, p < 0.05 and diff_SEXMale is “TRUE”, therefore I reject the null hypothesis which states there is no statistical significance between species abundance and sex. Since the lfc_SEXMale values are negative for species 1, 3, and 4, I conclude they are more abundant in females. Conversely, in species 2, 5, 6, p > 0.05 and diff_SEXMale is “FALSE”,  and I fail to reject the null hypothesis.
 
 Next, determine total count of taxa analyzed via ANCOM-BC2 and the number of statistically significant microbes (p < 0.05).
 
