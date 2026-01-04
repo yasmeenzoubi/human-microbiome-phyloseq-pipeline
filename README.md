@@ -289,7 +289,7 @@ plot_richness(ps_hmp_saliva,
 
 ![Alpha Diversity Box Plot](alpha_diversity_box.png)
 
-Interpretation: As previously stated, Shannon measures species abundance and evenness. Here, there is a high alpha diversity amongst male and female saliva microbes, where the minor differences are females samples possessing more consistent diversity measure and less outliers than males. This plot therefore illustrates that female saliva samples have a more clustered diversity profile and male samples have a wider diversity profile.
+Interpretation: As previously stated, Shannon measures species abundance and evenness. Here, there is a high alpha diversity amongst male and female saliva microbes, where the minor differences are females samples possessing more consistent diversity measures and less outliers than males. This plot therefore illustrates that female saliva samples have a more clustered diversity profile and male samples have a wider diversity profile.
 
 ## Creating a Beta Diversity PCoA Scatter Plot to compare Diversity of Microbes between Male and Female Saliva Samples (Bray-Curtis method)
 Here I want to compare the beta diversity of microbes between male and female samples via a PCoA scatter plot
