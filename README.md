@@ -11,7 +11,7 @@ This project demonstrates real-world microbiome workflows: phyloseq analysis, di
 
 ```r
 #Install necessary packages
-BiocManager::install(c("HMP16SData", "phyloseq", "ANCOMBC")
+BiocManager::install(c("HMP16SData", "phyloseq", "ANCOMBC"))
 install.packages(c("ggplot2", "dplyr", "vegan", "pheatmap"))
 
 #Load necessary packages
@@ -241,23 +241,34 @@ mat <- t(t(mat) / col_sums * 100)
 #Perform Z-score
 mat <- t(scale(t(mat))) 
 # Remove rows with zero variance (required by pheatmap)
-mat <- mat[apply(mat, 1, var) > 0, ]
-# Replace any remaining NA values with 0
-mat[is.na(mat)] <- 0
-# Optional: Map OTU IDs to genus names if available
-tax_table_mat <- tax_table(ps_hmp_saliva)
-if ("Genus" %in% colnames(tax_table_mat)) {
-  genus_names <- as.character(tax_table_mat[rownames(mat), "Genus"])
-  genus_names[is.na(genus_names)] <- rownames(mat)[is.na(genus_names)]
-  rownames(mat) <- genus_names
-}
+mat_scaled[is.na(mat_scaled)] <- 0
 #Plot heatmap
-pheatmap(mat, cluster_rows = TRUE, cluster_cols = FALSE, show_rownames = TRUE, show_colnames = FALSE, main = "Comparing Top 20 Salivary Microbes Abundance Profile between Various Male and Female Samples", color = colorRampPalette(c("yellow", "red"))(50))
+pheatmap(mat_scaled, main = "Top 20 Salivary Microbes: Male vs Female", cluster_rows = TRUE, cluster_cols = FALSE, show_colnames = FALSE, color = colorRampPalette(c("yellow", "orange", "firebrick3"))(100))
 ```
 
 ![Microbe Heatmap](microbe_heatmap.png)
 
 Interpretation: The data across multiple samples and microbes is very consistent with few distinct red plots indicating higher abundance. This plot overall confirms the PERMANOVA analysis and illustrates that there is no statistical significance between sex and microbiome abundance. The dendograms illustrate microbe hierarchical clustering and the row abundances appear consistent with the dendogram branching.
+
+## Creating a Volcano Plot
+A volcano plot can also be utilized to compare the statistical significance between male and female saliva microbes.
+```r
+EnhancedVolcano(results_df,
+    lab = results_df$taxon,        # Column with OTU or Taxon names
+    x = "lfc_SEXMale",             # ANCOM-BC2's Log Fold Change
+    y = "q_SEXMale",               # ANCOM-BC2's Adjusted P-value
+    title = "Microbiome: Male vs Female",
+    pCutoff = 0.05,
+    FCcutoff = 1.0,
+    pointSize = 2.0,
+    labSize = 3.0,
+    legendLabels = c('NS', 'LFC', 'q-value', 'q-value & LFC'),
+    legendPosition = 'right'
+)
+```
+
+![Microbe Volcano](volcano_hmp.png)
+Interpretation: 
 
 ## Creating an Alpha Diversity Box Plot to compare Diversity of Microbes between Male and Female Saliva Samples (Shannon method)
 Generate a Shannon index alpha diversity plot to compare microbe diversity between male and female samples.
