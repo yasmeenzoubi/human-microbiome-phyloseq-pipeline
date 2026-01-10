@@ -153,7 +153,7 @@ Total    161   58.109 1.00000
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
 
-Interpretation: Pr(>F) represents the p-value. Here p > 0.05 and is borderline. I therefore fail to reject the null hypothesis which states there is no statistical evidence between microbial species diversity and sex. According to the R2 value, sex only accounts for 0.764% of the variance.
+Interpretation: Pr(>F) represents the p-value. Here p > 0.05 and is borderline. I therefore fail to reject the null hypothesis which states there is no statistical evidence between microbial species diversity and sex. According to the coefficient of determination (R2 value), sex only accounts for 0.764% of the variance.
 
 ## Measuring the differential abundance analysis of salivary microbes
 Here I will measure the differential abundance analysis to determine statistical differences between selected groups. In this example, I will perform an analysis of salivary microbial communities between samples obtained from males versus females. There are different methods used to measure differential abundance, including DESeq2, ALDEx2, and ANCOM-BC2. DESeq2 is a widely-used tool, but is prone to false positives. Additionally, it is designed to analyze RNA-Seq data as opposed to ecological data. ALDEx2 reduces the number of false positives, but takes a very long time to code and obtain results in R. Here, I will use ANCOM-BC2, the gold standard for microbiome abundance analysis as it directly addresses the compositional nature of microbiome datasets and analyze the results as it is.
