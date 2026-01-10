@@ -133,7 +133,7 @@ Next, perform PERMANOVA to test for statistical significance between microbe div
 ```r
 #Here a seed is set to ensure reproducibility. Think of PERMANOVA as shuffling cards. Each seed value will determine a different shuffling sequence. A seed of 123 is very commonly used in statistical analysis.
 set.seed(123)
-#permanova is done via adonis2. I selected permutations = 9999, meaning the data is shuffled 9999 times to calculate the p-value. This value is selected because it ensures a precise p-value.
+#permanova is done via adonis2. I selected permutations = 9999, meaning the data is shuffled 9999 times to calculate the p-value. This value is selected because it ensures a precise p-value and allows for a p-value detection as low as 0.0001.
 permanova_result_sex <- adonis2(dist.bc ~ SEX, data = metadata_table, permutations = 9999)
 print(permanova_result_sex)
 ```
