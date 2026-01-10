@@ -47,7 +47,7 @@ ps_hmp_saliva <- subset_samples(ps_hmp, HMP_BODY_SUBSITE == "Saliva")
 #Filter non-zero data
 ps_hmp_saliva <- prune_taxa(taxa_sums(ps_hmp_saliva) > 0, ps_hmp_saliva)
 
-#Idenify how many samples and taxa present in the saliva dataet
+#Identify how many samples and taxa present in the saliva dataet
 ps_hmp_saliva
 ```
 Output
