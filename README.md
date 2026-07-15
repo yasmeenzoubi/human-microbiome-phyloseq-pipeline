@@ -47,7 +47,7 @@ ps_hmp_saliva <- subset_samples(ps_hmp, HMP_BODY_SUBSITE == "Saliva")
 #Filter non-zero data
 ps_hmp_saliva <- prune_taxa(taxa_sums(ps_hmp_saliva) > 0, ps_hmp_saliva)
 
-#Identify how many samples and taxa present in the saliva dataet
+#Identify how many samples and taxa present in the saliva dataset
 ps_hmp_saliva
 ```
 Output
@@ -77,8 +77,8 @@ phylogeny_tree <- phy_tree(ps_hmp_saliva)
 
 ## Determining the alpha and beta diversity of the sample population
 
-The purpose of determining the alpha and beta parameters is to analyze the microbial diversity within tbe subsetted sample (salivary). Alpha diversity measures the diversity of different microbes within a single sample, where a high alpha diversity indicates high abundance of a certain microbe in a sample (example: saliva), whereas a low diversity a lower abundance. On the other hand, beta diversity measures the similarity of microbial species between different samples (example: multiple saliva sample). A high beta diversity indicates that there is a difference in composition between samples (example: sample 1 may have more Campylobacter in their saliva while another may have more Neisseria), whereas a low diversity indicates they are similar (both samples have a similar abundance of Prevotella).
-To make this easier to understand, alpha diversity is like to counting the different colors of jelly beans in one jar, while beta diversity is similar to comparing two jars and determining if they have the same jelly bean colors.
+The purpose of determining the alpha and beta parameters is to analyze the microbial diversity within the subsetted sample (salivary). Alpha diversity measures the diversity of different microbes within a single sample, where a high alpha diversity indicates high abundance of a certain microbe in a sample (example: saliva), whereas a low diversity a lower abundance. On the other hand, beta diversity measures the similarity of microbial species between different samples (example: multiple saliva sample). A high beta diversity indicates that there is a difference in composition between samples (example: sample 1 may have more Campylobacter in their saliva while another may have more Neisseria), whereas a low diversity indicates they are similar (both samples have a similar abundance of Prevotella).
+To make this easier to understand, alpha diversity is like counting the different colors of jelly beans in one jar, while beta diversity is similar to comparing two jars and determining if they have the same jelly bean colors.
 
 ### Alpha Diversity
 Here I will use Shannon the index to calculate the alpha diversity. The Shannon index is a useful here since it helps with estimating species richness (number of different species are present in the saliva sample) and evenness (how evenly distributed microbes are).
@@ -227,7 +227,7 @@ Output
 
 Interpretation: Out of 2524 abundant microbes tested, 1011 showed significant differences in abundance between sexes
 
-## Creating a heat map/dendrogram to illustrate if there is a difference in abundance in the top 20 microbes between male and female saliva samples
+## Creating a heat map/dendrogram to illustrate the difference in abundance in the top 20 microbes between male and female saliva samples
 I want to see the top 20 most abundant microbes in the various male and female saliva samples and assess the diversity in overall diversity profile. This can be visualized via a heatmap
 
 ```r
